@@ -1,6 +1,6 @@
-python-telegram-bot==20.7
-aiohttp==3.9.1
-sentence-transformers==3.1.1  # Actualizado, maneja mejor 3.13
-numpy==1.26.4  # Compatible con 3.13
-faiss-cpu==1.8.0  # Versión fresca que sí tiene wheels pa' Linux x86_64 + Python 3.13
-torch==2.5.0  # Necesario pa' sentence-transformers, CPU-only
+python-telegram-bot==20.8
+aiohttp==3.9.5
+sentence-transformers==3.1.1
+torch==2.5.0+cpu --index-url https://download.pytorch.org/whl/cpu
+faiss-cpu==1.8.0
+numpy==2.1.1
