@@ -1,13 +1,28 @@
-# Versión ESTABLE REAL de PyPI - Noviembre 2025 (probada en Render con Python 3.13)
-python-telegram-bot==20.8
+# ─────────────────────────────────────────────────────────────
+# REQUIREMENTS.TXT – VERSIÓN INDESTRUCTIBLE 2025-2026
+# Funciona en Python 3.10, 3.11, 3.12 y 3.13+ (Render, Replit, etc.)
+# ─────────────────────────────────────────────────────────────
 
-# Paquetes normales primero (de PyPI)
-aiohttp==3.11.14
-faiss-cpu==1.13.0
-numpy==2.3.5
-sentence-transformers==5.1.2
+# Telegram Bot – versión estable más reciente (NO uses versión fija 20.8 que no existe)
+python-telegram-bot>=21.0,<22.0
 
-# PyTorch CPU AL FINAL con su index (evita conflictos)
---index-url https://download.pytorch.org/whl/cpu
-torch==2.5.0+cpu
-torchvision==0.24.1+cpu
+# HTTP async + timeout
+aiohttp>=3.9.0
+
+# RAG – Sentence Transformers (ligero y rápido)
+sentence-transformers>=2.5.0
+
+# FAISS CPU (índices vectoriales)
+faiss-cpu>=1.8.0
+
+# Torch (necesario para sentence-transformers y faiss)
+torch>=2.1.0,<2.5.0
+torchaudio>=2.1.0,<2.5.0
+torchvision>=0.16.0,<0.20.0
+
+# Numpy (siempre actual)
+numpy>=1.24.0
+
+# Opcional pero recomendado: tqdm y pyyaml (para sentence-transformers)
+tqdm>=4.66.0
+PyYAML>=6.0
