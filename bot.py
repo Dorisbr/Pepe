@@ -5,8 +5,7 @@ import asyncio
 from datetime import date
 from collections import defaultdict, deque
 from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes
-from telegram.ext import filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
 # ==================== CONFIG ====================
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -64,11 +63,11 @@ def get_user_usage(user_id):
     return USER_USAGE[uid]
 
 # ==================== HANDLERS ====================
-async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+def start_command(update: Update, context: CallbackContext):
     user = update.effective_user
     user_name = escape_markdown(user.first_name)
     
-    await update.message.reply_text(
+    update.message.reply_text(
         f"🔥 *FRAUDGPT ACTIVADO* 🔥\n\n"
         f"Hola {user_name}, bienvenido al infierno\\.\n\n"
         f"• *Free:* {FREE_DAILY_LIMIT} consultas/día\n"
@@ -78,13 +77,13 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="MarkdownV2"
     )
 
-async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+def stats_command(update: Update, context: CallbackContext):
     user_id = update.effective_user.id
     usage = get_user_usage(user_id)
     remaining = max(0, FREE_DAILY_LIMIT - usage["count"])
     status = "🔥 PREMIUM" if usage["premium"] else "💀 FREE"
     
-    await update.message.reply_text(
+    update.message.reply_text(
         f"*ESTADÍSTICAS FRAUDGPT*\n\n"
         f"• Status: {status}\n"
         f"• Usadas hoy: {usage['count']}\n"
@@ -93,11 +92,11 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="MarkdownV2"
     )
 
-async def reload_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+def reload_command(update: Update, context: CallbackContext):
     """Recarga el prompt del sistema (solo owner)"""
     user_id = update.effective_user.id
     if user_id != OWNER_ID:
-        await update.message.reply_text(
+        update.message.reply_text(
             "❌ Comando solo para el dios del caos\\.",
             parse_mode="MarkdownV2"
         )
@@ -106,12 +105,12 @@ async def reload_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         global SYSTEM_PROMPT
         SYSTEM_PROMPT = load_system_prompt()
-        await update.message.reply_text(
+        update.message.reply_text(
             "✅ *Prompt recargado desde system\\_prompt\\.txt*",
             parse_mode="MarkdownV2"
         )
     except Exception as e:
-        await update.message.reply_text(
+        update.message.reply_text(
             f"❌ *Error al recargar prompt:* {escape_markdown(str(e))}",
             parse_mode="MarkdownV2"
         )
@@ -139,7 +138,7 @@ async def call_nvidia_api(messages):
                 error_text = await response.text()
                 return f"🔥 Error del infierno \\(HTTP {response.status}\\): {error_text[:100]}"
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+def handle_message(update: Update, context: CallbackContext):
     if not update.message or not update.message.text:
         return
     
@@ -152,7 +151,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Anti-flood
     now = time.time()
     if now - USER_COOLDOWNS.get(user_id, 0) < FLOOD_DELAY:
-        await update.message.reply_text(
+        update.message.reply_text(
             "🕒 Espera 3 segundos, cabrón\\.",
             parse_mode="MarkdownV2"
         )
@@ -162,7 +161,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Límites de uso
     usage = get_user_usage(user_id)
     if not usage["premium"] and usage["count"] >= FREE_DAILY_LIMIT:
-        await update.message.reply_text(
+        update.message.reply_text(
             f"❌ Límite diario alcanzado \\({FREE_DAILY_LIMIT}\\)\\. Premium: @swippe\\_god",
             parse_mode="MarkdownV2"
         )
@@ -180,11 +179,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     messages = [{"role": "system", "content": system_prompt}] + list(history)
     
     # Enviar indicador de escritura
-    await update.message.reply_chat_action("typing")
+    update.message.reply_chat_action("typing")
+    
+    # Ejecutar llamada asíncrona en thread separado
+    def get_response():
+        return asyncio.run(call_nvidia_api(messages))
     
     try:
         # Obtener respuesta
-        reply = await call_nvidia_api(messages)
+        reply = get_response()
         
         # Actualizar historial
         history.append({"role": "assistant", "content": reply})
@@ -196,7 +199,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Escapar caracteres MarkdownV2
         escaped_reply = escape_markdown(reply)
             
-        await update.message.reply_text(
+        update.message.reply_text(
             escaped_reply, 
             disable_web_page_preview=True,
             parse_mode="MarkdownV2"
@@ -204,7 +207,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
     except Exception as e:
         error_msg = escape_markdown(str(e)[:100])
-        await update.message.reply_text(
+        update.message.reply_text(
             f"🔥 Error del averno: {error_msg}",
             parse_mode="MarkdownV2"
         )
@@ -213,7 +216,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Cargar prompt al iniciar
 SYSTEM_PROMPT = load_system_prompt()
 
-async def main():
+def main():
     if not TELEGRAM_TOKEN:
         print("❌ ERROR: TELEGRAM_TOKEN no configurado")
         return
@@ -222,23 +225,25 @@ async def main():
         print("❌ ERROR: NVIDIA_API_KEY no configurado")
         return
     
-    # Crear aplicación (nueva forma)
-    application = Application.builder().token(TELEGRAM_TOKEN).build()
+    # Crear updater (forma antigua pero estable)
+    updater = Updater(TELEGRAM_TOKEN, use_context=True)
+    dispatcher = updater.dispatcher
     
     # Handlers
-    application.add_handler(CommandHandler("start", start_command))
-    application.add_handler(CommandHandler("stats", stats_command))
-    application.add_handler(CommandHandler("reload", reload_command))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    dispatcher.add_handler(CommandHandler("start", start_command))
+    dispatcher.add_handler(CommandHandler("stats", stats_command))
+    dispatcher.add_handler(CommandHandler("reload", reload_command))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
     
-    print("🔥 FRAUDGPT INICIADO - PTB 20.7 COMPATIBLE")
+    print("🔥 FRAUDGPT INICIADO - PTB 13.15 COMPATIBLE")
     print(f"👤 Owner ID: {OWNER_ID}")
     print(f"📊 Límite free: {FREE_DAILY_LIMIT}/día")
     print("📁 Prompt cargado desde system_prompt.txt")
     print("✅ Bot funcionando correctamente")
     
     # Iniciar bot
-    await application.run_polling()
+    updater.start_polling()
+    updater.idle()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
