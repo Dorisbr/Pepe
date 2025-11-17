@@ -1,22 +1,6 @@
-# REQUIREMENTS.TXT – ANTI-ERROR 2025+ (Python 3.9-3.13, Render/Replit/VPS)
-# Rangos flexibles: agarra latest estable SIEMPRE, sin pins rotos
-
-# Telegram Bot (latest estable v22.5+ compatible)
-python-telegram-bot
-
-# HTTP async
-aiohttp
-
-# RAG: Embeddings
-sentence-transformers
-
-# Vector search (CPU)
-faiss
-
-# Torch (CPU, estable)
-torch
-numpy
-
-# Opcionales
-tqdm
-PyYAML
+python-telegram-bot==20.7
+aiohttp==3.9.1
+sentence-transformers==3.1.1  # Actualizado, maneja mejor 3.13
+numpy==1.26.4  # Compatible con 3.13
+faiss-cpu==1.8.0  # Versión fresca que sí tiene wheels pa' Linux x86_64 + Python 3.13
+torch==2.5.0  # Necesario pa' sentence-transformers, CPU-only
