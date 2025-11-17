@@ -1,28 +1,22 @@
-# ─────────────────────────────────────────────────────────────
-# REQUIREMENTS.TXT – VERSIÓN INDESTRUCTIBLE 2025-2026
-# Funciona en Python 3.10, 3.11, 3.12 y 3.13+ (Render, Replit, etc.)
-# ─────────────────────────────────────────────────────────────
+# REQUIREMENTS.TXT – ANTI-ERROR 2025+ (Python 3.9-3.13, Render/Replit/VPS)
+# Rangos flexibles: agarra latest estable SIEMPRE, sin pins rotos
 
-# Telegram Bot – versión estable más reciente (NO uses versión fija 20.8 que no existe)
-python-telegram-bot>=21.0,<22.0
+# Telegram Bot (latest estable v22.5+ compatible)
+python-telegram-bot>=21.0,<23.0
 
-# HTTP async + timeout
+# HTTP async
 aiohttp>=3.9.0
 
-# RAG – Sentence Transformers (ligero y rápido)
+# RAG: Embeddings
 sentence-transformers>=2.5.0
 
-# FAISS CPU (índices vectoriales)
+# Vector search (CPU)
 faiss-cpu>=1.8.0
 
-# Torch (necesario para sentence-transformers y faiss)
-torch>=2.1.0,<2.5.0
-torchaudio>=2.1.0,<2.5.0
-torchvision>=0.16.0,<0.20.0
-
-# Numpy (siempre actual)
+# Torch (CPU, estable)
+torch>=2.1.0,<2.6.0
 numpy>=1.24.0
 
-# Opcional pero recomendado: tqdm y pyyaml (para sentence-transformers)
+# Opcionales
 tqdm>=4.66.0
 PyYAML>=6.0
