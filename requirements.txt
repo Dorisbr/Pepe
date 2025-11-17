@@ -1,5 +1,5 @@
 # Versión ESTABLE REAL de PyPI - Noviembre 2025 (probada en Render con Python 3.13)
-python-telegram-bot==22.5
+python-telegram-bot==20.8
 
 # Paquetes normales primero (de PyPI)
 aiohttp==3.11.14
