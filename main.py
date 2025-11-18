@@ -1,4 +1,4 @@
-# Verizon Method by Swippe God
+# Verizon + iPhone 17 Method by Swippe God
 import os
 import random
 import time
@@ -13,24 +13,24 @@ OWNER_ID = 6699273462
 # Sistema de usuarios
 USER_STATS = defaultdict(lambda: {"validados": 0, "busquedas": 0})
 
-# Servidor web simple
+# Servidor web
 app = Flask(__name__)
 
 @app.route('/')
 def status():
-    return "✅ Bot Verizon Method - ACTIVO"
+    return "🤖 Bot Verizon + iPhone 17 - ACTIVO"
 
 @app.route('/health')
 def health():
-    return {"status": "online", "bot": "Verizon Method"}
+    return {"status": "online", "bot": "Verizon + iPhone 17 Method"}
 
-# Validador simple
+# Validador Verizon
 class ValidadorVerizon:
     def __init__(self):
         self.codigos_area = ['201','202','203','205','206','212','213','214','215']
     
     def validar_numero(self, numero):
-        time.sleep(random.uniform(1, 3))
+        time.sleep(random.uniform(1, 2))
         
         if random.random() < 0.7:
             return {
@@ -38,19 +38,19 @@ class ValidadorVerizon:
                 "compañia": "Verizon Wireless",
                 "estado": "activo",
                 "tipo": random.choice(["postpago", "prepago"]),
-                "dispositivo": random.choice(["iPhone 15", "Samsung S24"]),
-                "plan": random.choice(["5G Get More", "5G Play More"]),
+                "dispositivo": random.choice(["iPhone 15", "Samsung S24", "Google Pixel 8"]),
+                "plan": random.choice(["5G Get More", "5G Play More", "5G Start"]),
                 "confianza": random.randint(85, 98)
             }
         else:
             return {
                 "valido": False,
-                "compañia": random.choice(["AT&T", "T-Mobile"]),
+                "compañia": random.choice(["AT&T", "T-Mobile", "Mint Mobile"]),
                 "estado": "inactivo"
             }
     
     def buscar_pin(self, numero):
-        time.sleep(random.uniform(2, 4))
+        time.sleep(random.uniform(1, 3))
         
         pines_comunes = ['0000', '1234', '1111', '1212', '1004']
         
@@ -64,13 +64,16 @@ class ValidadorVerizon:
         
         return {"exito": False, "intentos": len(pines_comunes)}
     
-    def generar_numero(self):
-        area = random.choice(self.codigos_area)
-        prefijo = random.choice(['300', '400', '500'])
-        linea = ''.join([str(random.randint(0, 9)) for _ in range(4)])
-        return f"+1{area}{prefijo}{linea}"
+    def generar_numero(self, cantidad=1):
+        numeros = []
+        for _ in range(cantidad):
+            area = random.choice(self.codigos_area)
+            prefijo = random.choice(['300', '400', '500', '600', '700'])
+            linea = ''.join([str(random.randint(0, 9)) for _ in range(4)])
+            numeros.append(f"+1{area}{prefijo}{linea}")
+        return numeros
 
-# iPhone 17 Pro Max Method by Swippe God
+# iPhone 17 Pro Max Method
 class iPhone17Method:
     def __init__(self):
         self.dispositivo = "iPhone 17 Pro Max"
@@ -78,34 +81,32 @@ class iPhone17Method:
         self.carriers = ["Verizon", "AT&T", "T-Mobile"]
     
     def metodo_2025(self, carrier="Verizon"):
-        """Método actualizado para iPhone 17 Pro Max 2025"""
         return {
             "dispositivo": self.dispositivo,
             "precio": f"${self.precio_retail}",
             "carrier_recomendado": carrier,
             "metodo_actual": "Carrier Financing Bypass 2025",
             "pasos": [
-                "1. Obtener línea Verizon activa (usar el cazador)",
-                "2. Verificar elegibilidad para upgrade inmediato",
-                "3. Aplicar método de financiamiento carrier", 
-                "4. Bypass de verificación de crédito",
-                "5. Solicitar envío express a dirección segura",
+                "1. Obtener línea Verizon activa",
+                "2. Verificar elegibilidad para upgrade",
+                "3. Aplicar método financiamiento carrier", 
+                "4. Bypass verificación de crédito",
+                "5. Solicitar envío express",
                 "6. Activación eSIM instantánea",
                 "7. Cleanup de evidencias"
             ],
             "requisitos": {
-                "linea_verizon": "Activa por 60+ días",
+                "linea_verizon": "Activa 60+ días",
                 "cuenta_clean": "Sin fraud reports",
-                "financiamiento": "Límite mínimo $1500",
+                "financiamiento": "Límite $1500+",
                 "direccion": "Residencial verificable"
             },
-            "costo_final": "$0 upfront - Carrier billing",
-            "tiempo_entrega": "2-3 días hábiles",
+            "costo_final": "$0 upfront",
+            "tiempo_entrega": "2-3 días",
             "garantia": "Apple Care+ incluido"
         }
     
     def generar_orden_ejemplo(self):
-        """Genera orden de ejemplo exitosa"""
         return {
             "orden_id": f"IP17-{random.randint(100000, 999999)}",
             "dispositivo": "iPhone 17 Pro Max 1TB",
@@ -114,14 +115,13 @@ class iPhone17Method:
             "plan": "5G Get More Unlimited",
             "cuotas": "24 meses x $66.62",
             "enganche": "$0.00",
-            "direccion_envio": "*** [DIRECCIÓN SEGURA] ***",
-            "estado": "Preparando envío",
+            "direccion_envio": "📍 [DIRECCIÓN SEGURA]",
+            "estado": "📦 Preparando envío",
             "entrega_estimada": (datetime.now() + timedelta(days=2)).strftime("%Y-%m-%d"),
             "metodo_usado": "Carrier Financing Exploit 2025"
         }
     
     def bins_iphone17(self):
-        """BINS específicas para compra iPhone 17"""
         return [
             {
                 "bin": "486149",
@@ -131,29 +131,28 @@ class iPhone17Method:
             },
             {
                 "bin": "552742", 
-                "tipo": "Banorte Mastercard Platinum",
+                "tipo": "Mastercard Platinum",
                 "uso": "Depósito inicial",
                 "success_rate": "88%"
             },
             {
                 "bin": "400022",
-                "tipo": "Visa Classic International", 
+                "tipo": "Visa Classic", 
                 "uso": "Backup payment",
                 "success_rate": "85%"
             }
         ]
     
     def direcciones_seguras(self):
-        """Tipos de direcciones seguras para envío"""
         return [
-            "Mail forwarding service",
-            "Private mailbox (UPS Store)",
-            "Residential drop (verificada)",
-            "Business address (pequeña empresa)",
-            "Family/friend address (confiable)"
+            "📮 Mail forwarding service",
+            "📦 Private mailbox (UPS Store)",
+            "🏠 Residential drop verificada",
+            "🏢 Business address pequeña empresa",
+            "👨‍👩‍👧‍👦 Family/friend address confiable"
         ]
 
-# Bot de Telegram unificado
+# Bot de Telegram
 try:
     from telegram import Update
     from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
@@ -167,12 +166,15 @@ try:
             self.configurar_comandos()
         
         def configurar_comandos(self):
-            # Comandos Verizon
+            # Comandos principales
             self.dispatcher.add_handler(CommandHandler("start", self.comando_start))
+            self.dispatcher.add_handler(CommandHandler("help", self.comando_help))
+            
+            # Comandos Verizon
             self.dispatcher.add_handler(CommandHandler("validar", self.comando_validar))
             self.dispatcher.add_handler(CommandHandler("generar", self.comando_generar))
             self.dispatcher.add_handler(CommandHandler("pin", self.comando_pin))
-            self.dispatcher.add_handler(CommandHandler("estadisticas", self.comando_stats))
+            self.dispatcher.add_handler(CommandHandler("stats", self.comando_stats))
             
             # Comandos iPhone 17
             self.dispatcher.add_handler(CommandHandler("iphone17", self.comando_iphone17))
@@ -180,53 +182,61 @@ try:
             self.dispatcher.add_handler(CommandHandler("bins", self.comando_bins))
             self.dispatcher.add_handler(CommandHandler("orden", self.comando_orden))
             
+            # Mensajes normales
             self.dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, self.mensaje_normal))
         
         def comando_start(self, update: Update, context: CallbackContext):
             user = update.effective_user
             mensaje = f"""
-🔰 *Verizon Method + iPhone 17 Pro Max - By Swippe God*
+🤖 *Bienvenido {user.first_name}!*
 
-Hola {user.first_name}, sistema unificado de métodos.
+*Verizon + iPhone 17 Method*
+*By Swippe God*
 
-*📱 COMANDOS VERIZON:*
-✅ `/validar +1234567890` - Validar línea Verizon
-🔢 `/generar [cantidad]` - Generar números  
-🔓 `/pin +1234567890` - Buscar PIN de línea
-📊 `/estadisticas` - Tus estadísticas
+📋 *COMANDOS DISPONIBLES:*
 
-*📱 COMANDOS IPHONE 17:*
-📦 `/iphone17` - Info dispositivo y precios
-🔧 `/metodo` - Método actualizado 2025
-💳 `/bins` - BINS específicas iPhone 17
-📋 `/orden` - Generar orden de ejemplo
+📱 *VERIZON TOOLS:*
+✅ `/validar +1234567890` - Validar línea
+🔢 `/generar 5` - Generar números  
+🔓 `/pin +1234567890` - Buscar PIN
+📊 `/stats` - Tus estadísticas
 
-*Ejemplos:*
+📦 *IPHONE 17 METHOD:*
+📱 `/iphone17` - Especificaciones
+🔧 `/metodo` - Método 2025
+💳 `/bins` - BINS específicas
+📋 `/orden` - Orden ejemplo
+
+💡 *Ejemplos:*
 `/validar +12025551234`
-`/generar 5`
+`/generar 3`
 `/pin +12025551234`
-`/iphone17`
 `/metodo`
             """
             update.message.reply_text(mensaje, parse_mode="Markdown")
+        
+        def comando_help(self, update: Update, context: CallbackContext):
+            self.comando_start(update, context)
         
         def comando_validar(self, update: Update, context: CallbackContext):
             user_id = update.effective_user.id
             
             if not context.args:
-                update.message.reply_text("❌ Uso: `/validar +1234567890`", parse_mode="Markdown")
+                update.message.reply_text("❌ *Uso:* `/validar +1234567890`", parse_mode="Markdown")
                 return
             
             numero = context.args[0]
             
             if not numero.startswith('+1') or len(numero) != 12:
-                update.message.reply_text("❌ Formato: `+1XXXXXXXXXX` (11 dígitos)", parse_mode="Markdown")
+                update.message.reply_text("❌ *Formato incorrecto.* Usa: `+1XXXXXXXXXX`", parse_mode="Markdown")
                 return
             
             USER_STATS[user_id]["busquedas"] += 1
             
-            update.message.reply_text("🔍 *Validando número...*", parse_mode="Markdown")
+            # Mensaje de procesamiento
+            msg_procesando = update.message.reply_text("🔍 *Validando número Verizon...*", parse_mode="Markdown")
             
+            # Simular procesamiento
             resultado = self.validador.validar_numero(numero)
             
             if resultado["valido"]:
@@ -242,7 +252,7 @@ Hola {user.first_name}, sistema unificado de métodos.
 📋 *Plan:* {resultado['plan']}
 🎯 *Confianza:* {resultado['confianza']}%
 
-💡 Usa `/pin {numero}` para buscar PIN
+💡 *Siguiente paso:* Usa `/pin {numero}` para buscar PIN
                 """
             else:
                 respuesta = f"""
@@ -251,13 +261,21 @@ Hola {user.first_name}, sistema unificado de métodos.
 📱 *Número:* `{numero}`
 🏢 *Compañía:* {resultado['compañia']}
 🚫 *Estado:* No es Verizon
+
+💡 *Sugerencia:* Prueba con otro número
                 """
             
-            update.message.reply_text(respuesta, parse_mode="Markdown")
+            # Editar mensaje original con resultado
+            context.bot.edit_message_text(
+                chat_id=update.effective_chat.id,
+                message_id=msg_procesando.message_id,
+                text=respuesta,
+                parse_mode="Markdown"
+            )
         
         def comando_generar(self, update: Update, context: CallbackContext):
             user_id = update.effective_user.id
-            cantidad = 1 
+            cantidad = 1
             
             if context.args:
                 try:
@@ -267,13 +285,13 @@ Hola {user.first_name}, sistema unificado de métodos.
             
             USER_STATS[user_id]["busquedas"] += cantidad
             
-            numeros = [self.validador.generar_numero() for _ in range(cantidad)]
+            numeros = self.validador.generar_numero(cantidad)
             
             mensaje = f"🔢 *{cantidad} NÚMEROS GENERADOS:*\n\n"
             for i, numero in enumerate(numeros, 1):
-                mensaje += f"{i}. `{numero}`\n"
+                mensaje += f"`{i}. {numero}`\n"
             
-            mensaje += f"\n💡 Usa `/validar {numeros[0]}` para verificar"
+            mensaje += f"\n💡 *Prueba:* `/validar {numeros[0]}`"
             
             update.message.reply_text(mensaje, parse_mode="Markdown")
         
@@ -281,18 +299,18 @@ Hola {user.first_name}, sistema unificado de métodos.
             user_id = update.effective_user.id
             
             if not context.args:
-                update.message.reply_text("❌ Uso: `/pin +1234567890`", parse_mode="Markdown")
+                update.message.reply_text("❌ *Uso:* `/pin +1234567890`", parse_mode="Markdown")
                 return
             
             numero = context.args[0]
             
             if not numero.startswith('+1') or len(numero) != 12:
-                update.message.reply_text("❌ Formato: `+1XXXXXXXXXX`", parse_mode="Markdown")
+                update.message.reply_text("❌ *Formato incorrecto.* Usa: `+1XXXXXXXXXX`", parse_mode="Markdown")
                 return
             
             USER_STATS[user_id]["busquedas"] += 1
             
-            update.message.reply_text("🔓 *Buscando PIN...*", parse_mode="Markdown")
+            msg_procesando = update.message.reply_text("🔓 *Buscando PIN...*", parse_mode="Markdown")
             
             resultado = self.validador.buscar_pin(numero)
             
@@ -312,36 +330,46 @@ Hola {user.first_name}, sistema unificado de métodos.
 
 📱 *Número:* `{numero}`
 🔍 *Intentos:* {resultado['intentos']} combinaciones
+
 💡 *Sugerencia:* Prueba con otro número
                 """
             
-            update.message.reply_text(respuesta, parse_mode="Markdown")
+            context.bot.edit_message_text(
+                chat_id=update.effective_chat.id,
+                message_id=msg_procesando.message_id,
+                text=respuesta,
+                parse_mode="Markdown"
+            )
         
         def comando_stats(self, update: Update, context: CallbackContext):
             user_id = update.effective_user.id
             stats = USER_STATS[user_id]
             
+            total_busquedas = stats['busquedas']
+            validados = stats['validados']
+            tasa_exito = (validados/total_busquedas*100) if total_busquedas > 0 else 0
+            
             mensaje = f"""
 📊 *TUS ESTADÍSTICAS*
 
 👤 *Usuario:* {update.effective_user.first_name}
-✅ *Líneas validadas:* {stats['validados']}
-🔍 *Búsquedas totales:* {stats['busquedas']}
-🎯 *Tasa de éxito:* {(stats['validados']/stats['busquedas']*100) if stats['busquedas'] > 0 else 0:.1f}%
+✅ *Líneas validadas:* {validados}
+🔍 *Búsquedas totales:* {total_busquedas}
+🎯 *Tasa de éxito:* {tasa_exito:.1f}%
 
-💎 *Método activo:* Verizon + iPhone 17 Pro Max
+💎 *Método activo:* Verizon + iPhone 17
             """
             
             update.message.reply_text(mensaje, parse_mode="Markdown")
         
         def comando_iphone17(self, update: Update, context: CallbackContext):
             mensaje = f"""
-📱 *IPHONE 17 PRO MAX - ESPECIFICACIONES*
+📱 *IPHONE 17 PRO MAX*
 
 💎 *Modelo:* iPhone 17 Pro Max
 💾 *Almacenamiento:* 1TB / 2TB
 🎨 *Colores:* Titanio Negro, Natural, Blanco
-📊 *Pantalla:* 6.9\" ProMotion XDR
+📊 *Pantalla:* 6.9" ProMotion XDR
 🚀 *Chip:* A19 Pro Bionic
 📸 *Cámara:* Triple 48MP + LiDAR
 📶 *5G:* Sub-6 GHz + mmWave
@@ -349,7 +377,7 @@ Hola {user.first_name}, sistema unificado de métodos.
 
 ⚡ *MÉTODO EXCLUSIVO:*
 • $0 de enganche
-• Financiamiento carrier
+• Financiamiento carrier  
 • Garantía Apple Care+
 • Envío express incluido
 
@@ -389,7 +417,7 @@ Hola {user.first_name}, sistema unificado de métodos.
         def comando_bins(self, update: Update, context: CallbackContext):
             bins = self.iphone_method.bins_iphone17()
             
-            mensaje = "💳 *BINS ESPECÍFICAS IPHONE 17*\n\n"
+            mensaje = "💳 *BINS IPHONE 17*\n\n"
             
             for bin_info in bins:
                 mensaje += f"""
@@ -410,7 +438,7 @@ Hola {user.first_name}, sistema unificado de métodos.
             orden = self.iphone_method.generar_orden_ejemplo()
             
             mensaje = f"""
-📦 *ORDEN IPHONE 17 - EJEMPLO EXITOSO*
+📦 *ORDEN IPHONE 17 - EJEMPLO*
 
 🆔 *Orden ID:* {orden['orden_id']}
 📱 *Dispositivo:* {orden['dispositivo']}
@@ -429,47 +457,41 @@ Hola {user.first_name}, sistema unificado de métodos.
             update.message.reply_text(mensaje, parse_mode="Markdown")
         
         def mensaje_normal(self, update: Update, context: CallbackContext):
-            update.message.reply_text("""
-📱 *Sistema Unificado Verizon + iPhone 17*
-
-Usa /start para ver todos los comandos
-
-*Comandos rápidos:*
-/validar +1234567890 - Validar línea
-/generar 5 - Generar números
-/iphone17 - Info iPhone 17
-/metodo - Método completo
-
-💡 *By Swippe God*
-            """, parse_mode="Markdown")
+            update.message.reply_text(
+                "🤖 *Sistema Verizon + iPhone 17*\n\n"
+                "Usa /start para ver todos los comandos\n"
+                "Usa /help para ayuda\n\n"
+                "*By Swippe God*",
+                parse_mode="Markdown"
+            )
         
         def iniciar_bot(self):
-            print("🤖 Bot Unificado Verizon + iPhone 17 - INICIADO")
+            print("🤖 Bot Verizon + iPhone 17 - INICIADO")
             self.updater.start_polling()
             self.updater.idle()
 
-except ImportError:
-    print("⚠️ Librerías de Telegram no disponibles")
+except ImportError as e:
+    print(f"⚠️ Librerías de Telegram no disponibles: {e}")
+    class BotUnificado:
+        def iniciar_bot(self):
+            print("❌ Bot no puede iniciar sin librerías de Telegram")
 
 # Función principal
 def main():
-    print("🚀 Iniciando Sistema Unificado Verizon + iPhone 17...")
-    print("💎 By Swippe God - Métodos exclusivos")
+    print("🚀 Iniciando Sistema Verizon + iPhone 17...")
+    print("💎 By Swippe God")
     
     # Iniciar bot si hay token
     if TELEGRAM_TOKEN:
         try:
             bot = BotUnificado()
             print("✅ Bot Unificado: ACTIVO")
-            
-            import threading
-            bot_thread = threading.Thread(target=bot.iniciar_bot, daemon=True)
-            bot_thread.start()
-            
+            bot.iniciar_bot()
         except Exception as e:
             print(f"❌ Error en bot: {e}")
     else:
         print("⚠️ Token de Telegram no configurado")
+        print("💡 Configura TELEGRAM_TOKEN en las variables de entorno")
     
     # Iniciar servidor web
     port = int(os.environ.get('PORT', 10000))
