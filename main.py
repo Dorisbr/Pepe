@@ -506,20 +506,59 @@ def api_research():
         }
     }
 
-# ==================== INICIALIZACIÓN ====================
+# ==================== CONFIGURACIÓN RENDER ====================
+def is_running_on_render():
+    return 'RENDER' in os.environ
+
+# Configuración específica para Render
+if is_running_on_render():
+    print("🔥 RENDER DEPLOYMENT DETECTED")
+    # Ajustes para Render
+    RENDER_CONFIG = {
+        "max_requests": 50,
+        "delay_multiplier": 1.5,
+        "web_only": False
+    }
+
+# ==================== INICIALIZACIÓN MEJORADA ====================
 def main():
-    """Función principal"""
+    """Función principal mejorada para Render"""
     print("🚀 INITIALIZING ACADEMIC RESEARCH PLATFORM")
-    print("🔒 Replit-safe mode: ACTIVE")
-    print("🌐 Web server: ACTIVE")
     
-    # Iniciar servidor web
-    if os.getenv('REPL_SLUG'):
+    if is_running_on_render():
+        print("✅ Running on Render.com")
+        print("🌐 Web Server: ACTIVE")
+        print("🤖 Telegram Bot: ACTIVE")
+        
+        # Iniciar ambos servicios en Render
+        import threading
+        
+        def start_bot():
+            try:
+                bot = ReplitVerizonBot()
+                bot.start_bot()
+            except Exception as e:
+                print(f"❌ Bot error: {e}")
+        
+        # Iniciar bot en hilo separado
+        bot_thread = threading.Thread(target=start_bot, daemon=True)
+        bot_thread.start()
+        
+        # Iniciar servidor web principal
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port, debug=False)
+        
+    elif os.getenv('REPL_SLUG'):
         print("✅ Running in Replit environment")
-        # En Replit, solo servidor web
         app.run(host='0.0.0.0', port=5000, debug=False)
     elif TELEGRAM_TOKEN:
         print("✅ Running in standalone mode with Telegram")
-        # Fuera de Replit, iniciar bot
         bot = ReplitVerizonBot()
-   
+        bot.start_bot()
+    else:
+        print("🌐 Starting web server only")
+        app.run(host='0.0.0.0', port=5000, debug=False)
+
+if __name__ == "__main__":
+    main()
+    
