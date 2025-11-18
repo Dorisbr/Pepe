@@ -293,6 +293,235 @@ This tool simulates carrier analysis for educational research in telecommunicati
             update.message.reply_text(response_text, parse_mode="Markdown")
         
         async def generate_command(self, update: Update, context: CallbackContext):
+# main.py
+import os
+import asyncio
+import random
+import time
+from datetime import datetime
+from collections import defaultdict
+from flask import Flask, render_template_string
+import aiohttp
+
+# ==================== CONFIGURACIÓN ====================
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+OWNER_ID = 6699273462
+
+# ==================== SISTEMA DE USUARIOS ====================
+USER_STATS = defaultdict(lambda: {"validated": 0, "searches": 0, "last_reset": datetime.now().isoformat()})
+
+# ==================== APARIENCIA WEB LEGÍTIMA ====================
+app = Flask(__name__)
+
+HTML_TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telecom Research Lab</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .header { background: #2c3e50; color: white; padding: 20px; border-radius: 10px; text-align: center; }
+        .container { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔬 Telecom Research Laboratory</h1>
+        <p>Academic Research on Telecommunications Patterns</p>
+    </div>
+    <div class="container">
+        <h2>Research Dashboard</h2>
+        <p>Educational tool for telecom pattern analysis.</p>
+        <p><strong>Status:</strong> Online</p>
+    </div>
+</body>
+</html>
+"""
+
+# ==================== VALIDADOR CON AIOHTTP ====================
+class AsyncValidator:
+    def __init__(self):
+        self.session = None
+        
+    async def get_session(self):
+        """Obtiene sesión aiohttp"""
+        if self.session is None:
+            self.session = aiohttp.ClientSession()
+        return self.session
+    
+    async def validate_number(self, phone_number):
+        """Valida número usando aiohttp"""
+        await asyncio.sleep(random.uniform(1, 3))  # Simular delay
+        
+        # Simulación con aiohttp (podrías hacer requests reales aquí)
+        if random.random() < 0.65:
+            return {
+                "valid": True,
+                "carrier": "Verizon Wireless",
+                "status": "active",
+                "confidence": random.randint(85, 98),
+                "timestamp": datetime.now().isoformat()
+            }
+        else:
+            return {
+                "valid": False,
+                "carrier": random.choice(["AT&T", "T-Mobile", "Sprint"]),
+                "status": "inactive",
+                "confidence": random.randint(70, 90),
+                "timestamp": datetime.now().isoformat()
+            }
+    
+    async def close_session(self):
+        """Cierra la sesión aiohttp"""
+        if self.session:
+            await self.session.close()
+
+# ==================== BOT TELEGRAM MEJORADO ====================
+try:
+    from telegram import Update
+    from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+    
+    class VerizonResearchBot:
+        def __init__(self):
+            self.validator = AsyncValidator()
+            self.updater = Updater(TELEGRAM_TOKEN, use_context=True)
+            self.dispatcher = self.updater.dispatcher
+            self.setup_handlers()
+        
+        def setup_handlers(self):
+            """Configura handlers del bot"""
+            self.dispatcher.add_handler(CommandHandler("start", self.start_command))
+            self.dispatcher.add_handler(CommandHandler("validate", self.validate_command))
+            self.dispatcher.add_handler(CommandHandler("stats", self.stats_command))
+            self.dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, self.handle_message))
+        
+        def start_command(self, update: Update, context: CallbackContext):
+            """Comando /start"""
+            user = update.effective_user
+            update.message.reply_text(
+                f"🔬 *Telecom Research Bot*\n\n"
+                f"Welcome {user.first_name}!\n\n"
+                f"*Commands:*\n"
+                f"/validate +1234567890 - Analyze carrier\n"
+                f"/stats - Your research stats\n\n"
+                f"*Academic Use Only*",
+                parse_mode="Markdown"
+            )
+        
+        async def validate_command(self, update: Update, context: CallbackContext):
+            """Comando /validate"""
+            user_id = update.effective_user.id
+            
+            if not context.args:
+                update.message.reply_text("❌ Usage: `/validate +1234567890`", parse_mode="Markdown")
+                return
+            
+            phone_number = context.args[0]
+            USER_STATS[user_id]["searches"] += 1
+            
+            update.message.reply_text("🔍 *Analyzing carrier pattern...*", parse_mode="Markdown")
+            
+            # Usar aiohttp para validación asíncrona
+            result = await self.validator.validate_number(phone_number)
+            
+            if result["valid"]:
+                USER_STATS[user_id]["validated"] += 1
+                response_text = f"""
+✅ *VERIZON DETECTED*
+
+📱 *Number:* `{phone_number}`
+🏢 *Carrier:* {result['carrier']}
+📊 *Status:* {result['status']}
+🎯 *Confidence:* {result['confidence']}%
+                """
+            else:
+                response_text = f"""
+❌ *NON-VERIZON*
+
+📱 *Number:* `{phone_number}`
+🏢 *Carrier:* {result['carrier']}
+🚫 *Status:* Not Verizon
+                """
+            
+            update.message.reply_text(response_text, parse_mode="Markdown")
+        
+        def stats_command(self, update: Update, context: CallbackContext):
+            """Comando /stats"""
+            user_id = update.effective_user.id
+            stats = USER_STATS[user_id]
+            
+            update.message.reply_text(
+                f"📊 *Research Stats*\n\n"
+                f"• Validations: {stats['validated']}\n"
+                f"• Searches: {stats['searches']}\n"
+                f"• Tier: {'🔬 PREMIUM' if user_id == OWNER_ID else '📚 STANDARD'}",
+                parse_mode="Markdown"
+            )
+        
+        def handle_message(self, update: Update, context: CallbackContext):
+            """Maneja mensajes normales"""
+            update.message.reply_text(
+                "🔬 *Telecom Research Bot*\n\n"
+                "Use /start for commands\n"
+                "Use /validate +1234567890 to analyze",
+                parse_mode="Markdown"
+            )
+        
+        def start_bot(self):
+            """Inicia el bot"""
+            print("🤖 Telegram Bot Started")
+            self.updater.start_polling()
+            self.updater.idle()
+        
+        async def shutdown(self):
+            """Cierra recursos"""
+            await self.validator.close_session()
+
+except ImportError:
+    print("⚠️ Telegram libraries not available")
+
+# ==================== WEB SERVER ====================
+@app.route('/')
+def home():
+    return render_template_string(HTML_TEMPLATE)
+
+@app.route('/health')
+def health():
+    return {"status": "online", "service": "telecom_research"}
+
+# ==================== INICIALIZACIÓN MEJORADA ====================
+async def main_async():
+    """Función principal asíncrona"""
+    print("🚀 Starting Telecom Research Platform")
+    
+    # Iniciar bot si hay token
+    if TELEGRAM_TOKEN:
+        try:
+            bot = VerizonResearchBot()
+            print("🤖 Telegram Bot: ACTIVE")
+            
+            # Iniciar bot en segundo plano
+            import threading
+            def run_bot():
+                bot.start_bot()
+            
+            bot_thread = threading.Thread(target=run_bot, daemon=True)
+            bot_thread.start()
+            
+        except Exception as e:
+            print(f"❌ Bot failed: {e}")
+    
+    # Iniciar servidor web
+    port = int(os.environ.get('PORT', 5000))
+    print(f"🌐 Web Server starting on port {port}")
+    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
+
+def main():
+    """Wrapper síncrono para Flask"""
+    asyncio.run(main_async())
+
+if __name__ == "__main__":
+    main()
             """Comando /generate"""
             user_id = update.effective_user.id
             count = 1
@@ -440,125 +669,3 @@ This tool simulates carrier analysis for educational research in telecommunicati
             """Maneja mensajes normales"""
             update.message.reply_text("""
 🔬 *Academic Research Bot*
-
-Use /start for research commands
-Use /research for web dashboard
-
-*Research Commands:*
-/validate - Analyze carrier
-/generate - Create samples
-/bruteforce - Security research  
-/stats - Research metrics
-            """, parse_mode="Markdown")
-        
-        def start_bot(self):
-            """Inicia el bot"""
-            print("🔬 ACADEMIC RESEARCH BOT STARTED")
-            print(f"👤 Owner ID: {OWNER_ID}")
-            print("✅ Bot running in Replit-safe mode")
-            print("🌐 Web dashboard available at /research")
-            
-            self.updater.start_polling()
-            self.updater.idle()
-
-except ImportError:
-    print("⚠️ Telegram libraries not available - running in web mode only")
-
-# ==================== WEB SERVER ====================
-@app.route('/')
-def research_dashboard():
-    """Dashboard web de investigación"""
-    research_results = [
-        {
-            "number": "+12025551234",
-            "valid": True,
-            "carrier": "Verizon Wireless", 
-            "status": "active",
-            "confidence": 95,
-            "timestamp": datetime.now().isoformat()
-        },
-        {
-            "number": "+12125551234",
-            "valid": False,
-            "carrier": "AT&T",
-            "status": "inactive", 
-            "confidence": 87,
-            "timestamp": datetime.now().isoformat()
-        }
-    ]
-    
-    limits = {
-        "remaining": 25
-    }
-    
-    return render_template_string(HTML_TEMPLATE, results=research_results, limits=limits)
-
-@app.route('/api/research')
-def api_research():
-    """API para investigación"""
-    return {
-        "project": "Academic Carrier Research",
-        "version": "1.0",
-        "purpose": "Educational telecommunications analysis",
-        "limits": {
-            "max_requests": 30,
-            "reset_period": "hourly"
-        }
-    }
-
-# ==================== CONFIGURACIÓN RENDER ====================
-def is_running_on_render():
-    return 'RENDER' in os.environ
-
-# Configuración específica para Render
-if is_running_on_render():
-    print("🔥 RENDER DEPLOYMENT DETECTED")
-    # Ajustes para Render
-    RENDER_CONFIG = {
-        "max_requests": 50,
-        "delay_multiplier": 1.5,
-        "web_only": False
-    }
-
-# ==================== INICIALIZACIÓN MEJORADA ====================
-def main():
-    """Función principal mejorada para Render"""
-    print("🚀 INITIALIZING ACADEMIC RESEARCH PLATFORM")
-    
-    if is_running_on_render():
-        print("✅ Running on Render.com")
-        print("🌐 Web Server: ACTIVE")
-        print("🤖 Telegram Bot: ACTIVE")
-        
-        # Iniciar ambos servicios en Render
-        import threading
-        
-        def start_bot():
-            try:
-                bot = ReplitVerizonBot()
-                bot.start_bot()
-            except Exception as e:
-                print(f"❌ Bot error: {e}")
-        
-        # Iniciar bot en hilo separado
-        bot_thread = threading.Thread(target=start_bot, daemon=True)
-        bot_thread.start()
-        
-        # Iniciar servidor web principal
-        port = int(os.environ.get('PORT', 5000))
-        app.run(host='0.0.0.0', port=port, debug=False)
-        
-    elif os.getenv('REPL_SLUG'):
-        print("✅ Running in Replit environment")
-        app.run(host='0.0.0.0', port=5000, debug=False)
-    elif TELEGRAM_TOKEN:
-        print("✅ Running in standalone mode with Telegram")
-        bot = ReplitVerizonBot()
-        bot.start_bot()
-    else:
-        print("🌐 Starting web server only")
-        app.run(host='0.0.0.0', port=5000, debug=False)
-
-if __name__ == "__main__":
-    main()
-    
