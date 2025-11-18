@@ -16,6 +16,289 @@ USER_STATS = defaultdict(lambda: {"validados": 0, "busquedas": 0})
 # Servidor web simple
 app = Flask(__name__)
 
+# iPhone 17 Pro Max Method by Swippe God
+import os
+import random
+import time
+from datetime import datetime
+from flask import Flask
+
+# Configuración
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+OWNER_ID = 6699273462
+
+app = Flask(__name__)
+
+@app.route('/')
+def status():
+    return "📱 iPhone 17 Method - ACTIVO"
+
+# Método iPhone 17 Pro Max
+class iPhone17Method:
+    def __init__(self):
+        self.dispositivo = "iPhone 17 Pro Max"
+        self.precio_retail = 1599
+        self.carriers = ["Verizon", "AT&T", "T-Mobile"]
+    
+    def metodo_2025(self, carrier="Verizon"):
+        """Método actualizado para iPhone 17 Pro Max 2025"""
+        return {
+            "dispositivo": self.dispositivo,
+            "precio": f"${self.precio_retail}",
+            "carrier_recomendado": carrier,
+            "metodo_actual": "Carrier Financing Bypass 2025",
+            "pasos": [
+                "1. Obtener línea Verizon activa (usar el cazador)",
+                "2. Verificar elegibilidad para upgrade inmediato",
+                "3. Aplicar método de financiamiento carrier", 
+                "4. Bypass de verificación de crédito",
+                "5. Solicitar envío express a dirección segura",
+                "6. Activación eSIM instantánea",
+                "7. Cleanup de evidencias"
+            ],
+            "requisitos": {
+                "linea_verizon": "Activa por 60+ días",
+                "cuenta_clean": "Sin fraud reports",
+                "financiamiento": "Límite mínimo $1500",
+                "direccion": "Residencial verificable"
+            },
+            "costo_final": "$0 upfront - Carrier billing",
+            "tiempo_entrega": "2-3 días hábiles",
+            "garantia": "Apple Care+ incluido"
+        }
+    
+    def generar_orden_ejemplo(self):
+        """Genera orden de ejemplo exitosa"""
+        return {
+            "orden_id": f"IP17-{random.randint(100000, 999999)}",
+            "dispositivo": "iPhone 17 Pro Max 1TB",
+            "color": random.choice(["Titanio Negro", "Titanio Natural", "Titanio Blanco"]),
+            "carrier": "Verizon Wireless",
+            "plan": "5G Get More Unlimited",
+            "cuotas": "24 meses x $66.62",
+                "enganche": "$0.00",
+            "direccion_envio": "*** [DIRECCIÓN SEGURA] ***",
+            "estado": "Preparando envío",
+            "entrega_estimada": (datetime.now() + timedelta(days=2)).strftime("%Y-%m-%d"),
+            "metodo_usado": "Carrier Financing Exploit 2025"
+        }
+    
+    def bins_iphone17(self):
+        """BINS específicas para compra iPhone 17"""
+        return [
+            {
+                "bin": "486149",
+                "tipo": "HSBC Business Visa",
+                "uso": "Verificación carrier",
+                "success_rate": "92%"
+            },
+            {
+                "bin": "552742", 
+                "tipo": "Banorte Mastercard Platinum",
+                "uso": "Depósito inicial",
+                "success_rate": "88%"
+            },
+            {
+                "bin": "400022",
+                "tipo": "Visa Classic International", 
+                "uso": "Backup payment",
+                "success_rate": "85%"
+            }
+        ]
+    
+    def direcciones_seguras(self):
+        """Tipos de direcciones seguras para envío"""
+        return [
+            "Mail forwarding service",
+            "Private mailbox (UPS Store)",
+            "Residential drop (verificada)",
+            "Business address (pequeña empresa)",
+            "Family/friend address (confiable)"
+        ]
+
+# Bot de Telegram para iPhone 17
+try:
+    from telegram import Update
+    from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+    
+    class BotiPhone17:
+        def __init__(self):
+            self.iphone_method = iPhone17Method()
+            self.updater = Updater(TELEGRAM_TOKEN, use_context=True)
+            self.dispatcher = self.updater.dispatcher
+            self.configurar_comandos()
+        
+        def configurar_comandos(self):
+            self.dispatcher.add_handler(CommandHandler("start", self.comando_start))
+            self.dispatcher.add_handler(CommandHandler("iphone17", self.comando_iphone17))
+            self.dispatcher.add_handler(CommandHandler("metodo", self.comando_metodo))
+            self.dispatcher.add_handler(CommandHandler("bins", self.comando_bins))
+            self.dispatcher.add_handler(CommandHandler("orden", self.comando_orden))
+            self.dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, self.mensaje_normal))
+        
+        def comando_start(self, update: Update, context: CallbackContext):
+            user = update.effective_user
+            mensaje = f"""
+📱 *iPhone 17 Pro Max Method - By Swippe God*
+
+Hola {user.first_name}, método exclusivo para iPhone 17 Pro Max.
+
+*Comandos disponibles:*
+📦 `/iphone17` - Info dispositivo y precios
+🔧 `/metodo` - Método actualizado 2025
+💳 `/bins` - BINS específicas iPhone 17
+📋 `/orden` - Generar orden de ejemplo
+
+*Características:*
+• iPhone 17 Pro Max 1TB
+• $0 de enganche 
+• Carrier billing
+• Envío express 2-3 días
+• Garantía Apple incluida
+            """
+            update.message.reply_text(mensaje, parse_mode="Markdown")
+        
+        def comando_iphone17(self, update: Update, context: CallbackContext):
+            mensaje = f"""
+📱 *IPHONE 17 PRO MAX - ESPECIFICACIONES*
+
+💎 *Modelo:* iPhone 17 Pro Max
+💾 *Almacenamiento:* 1TB / 2TB
+🎨 *Colores:* Titanio Negro, Natural, Blanco
+📊 *Pantalla:* 6.9\" ProMotion XDR
+🚀 *Chip:* A19 Pro Bionic
+📸 *Cámara:* Triple 48MP + LiDAR
+📶 *5G:* Sub-6 GHz + mmWave
+💰 *Precio Retail:* ${self.iphone_method.precio_retail}
+
+⚡ *MÉTODO EXCLUSIVO:*
+• $0 de enganche
+• Financiamiento carrier
+• Garantía Apple Care+
+• Envío express incluido
+
+💡 Usa `/metodo` para ver el método completo
+            """
+            update.message.reply_text(mensaje, parse_mode="Markdown")
+        
+        def comando_metodo(self, update: Update, context: CallbackContext):
+            metodo = self.iphone_method.metodo_2025()
+            
+            mensaje = f"""
+🔧 *MÉTODO IPHONE 17 PRO MAX 2025*
+
+📱 *Dispositivo:* {metodo['dispositivo']}
+🏢 *Carrier:* {metodo['carrier_recomendado']}
+💵 *Precio:* {metodo['precio']}
+🔓 *Método:* {metodo['metodo_actual']}
+
+📋 *PASOS A SEGUIR:*
+"""
+            for paso in metodo['pasos']:
+                mensaje += f"{paso}\n"
+            
+            mensaje += f"""
+✅ *REQUISITOS:*
+• Línea Verizon: {metodo['requisitos']['linea_verizon']}
+• Cuenta limpia: {metodo['requisitos']['cuenta_clean']}
+• Financiamiento: {metodo['requisitos']['financiamiento']}
+• Dirección: {metodo['requisitos']['direccion']}
+
+💰 *COSTO FINAL:* {metodo['costo_final']}
+🚚 *ENTREGA:* {metodo['tiempo_entrega']}
+🛡️ *GARANTÍA:* {metodo['garantia']}
+            """
+            update.message.reply_text(mensaje, parse_mode="Markdown")
+        
+        def comando_bins(self, update: Update, context: CallbackContext):
+            bins = self.iphone_method.bins_iphone17()
+            
+            mensaje = "💳 *BINS ESPECÍFICAS IPHONE 17*\n\n"
+            
+            for bin_info in bins:
+                mensaje += f"""
+🔸 *BIN:* `{bin_info['bin']}`
+🏦 *Tipo:* {bin_info['tipo']}
+🎯 *Uso:* {bin_info['uso']}
+✅ *Éxito:* {bin_info['success_rate']}
+"""
+            
+            mensaje += "\n💡 *DIRECCIONES SEGURAS:*\n"
+            direcciones = self.iphone_method.direcciones_seguras()
+            for dir in direcciones:
+                mensaje += f"• {dir}\n"
+            
+            update.message.reply_text(mensaje, parse_mode="Markdown")
+        
+        def comando_orden(self, update: Update, context: CallbackContext):
+            orden = self.iphone_method.generar_orden_ejemplo()
+            
+            mensaje = f"""
+📦 *ORDEN IPHONE 17 - EJEMPLO EXITOSO*
+
+🆔 *Orden ID:* {orden['orden_id']}
+📱 *Dispositivo:* {orden['dispositivo']}
+🎨 *Color:* {orden['color']}
+🏢 *Carrier:* {orden['carrier']}
+📋 *Plan:* {orden['plan']}
+💳 *Cuotas:* {orden['cuotas']}
+💰 *Enganche:* {orden['enganche']}
+🏠 *Envío:* {orden['direccion_envio']}
+📊 *Estado:* {orden['estado']}
+🚚 *Entrega:* {orden['entrega_estimada']}
+🔧 *Método:* {orden['metodo_usado']}
+
+✅ *ORDEN COMPLETADA - DISPOSITIVO EN CAMINO*
+            """
+            update.message.reply_text(mensaje, parse_mode="Markdown")
+        
+        def mensaje_normal(self, update: Update, context: CallbackContext):
+            update.message.reply_text("""
+📱 *iPhone 17 Pro Max Method*
+
+Usa /start para ver comandos
+Usa /iphone17 para especificaciones
+
+*Comandos rápidos:*
+/iphone17 - Info dispositivo
+/metodo - Método completo  
+/bins - BINS específicas
+/orden - Orden de ejemplo
+            """, parse_mode="Markdown")
+        
+        def iniciar_bot(self):
+            print("📱 iPhone 17 Method - INICIADO")
+            self.updater.start_polling()
+            self.updater.idle()
+
+except ImportError:
+    print("⚠️ Librerías de Telegram no disponibles")
+
+# Función principal
+def main():
+    print("🚀 Iniciando iPhone 17 Method...")
+    print("📱 By Swippe God - Método exclusivo")
+    
+    # Iniciar bot si hay token
+    if TELEGRAM_TOKEN:
+        try:
+            bot = BotiPhone17()
+            print("✅ Bot iPhone 17: ACTIVO")
+            
+            import threading
+            bot_thread = threading.Thread(target=bot.iniciar_bot, daemon=True)
+            bot_thread.start()
+            
+        except Exception as e:
+            print(f"❌ Error en bot: {e}")
+    
+    # Iniciar servidor web
+    port = int(os.environ.get('PORT', 10000))
+    print(f"🌐 Servidor web en puerto {port}")
+    app.run(host='0.0.0.0', port=port, debug=False)
+
+if __name__ == "__main__":
+    main()
 @app.route('/')
 def status():
     return "✅ Bot Verizon Method - ACTIVO"
@@ -163,125 +446,3 @@ Hola {user.first_name}, bienvenido al sistema de validación Verizon.
                 try:
                     cantidad = min(int(context.args[0]), 10)
                 except:
-                    cantidad = 1
-            
-            USER_STATS[user_id]["busquedas"] += cantidad
-            
-            update.message.reply_text(f"🔢 *Generando {cantidad} números...*", parse_mode="Markdown")
-            
-            numeros = [self.validador.generar_numero() for _ in range(cantidad)]
-            
-            respuesta = "📱 *NÚMEROS GENERADOS:*\n\n"
-            for i, num in enumerate(numeros, 1):
-                respuesta += f"`{i}. {num}`\n"
-            
-            respuesta += f"\n💡 Usa `/validar [número]` para verificar"
-            
-            update.message.reply_text(respuesta, parse_mode="Markdown")
-        
-        def comando_pin(self, update: Update, context: CallbackContext):
-            user_id = update.effective_user.id
-            
-            if not context.args:
-                update.message.reply_text("❌ Uso: `/pin +1234567890`", parse_mode="Markdown")
-                return
-            
-            numero = context.args[0]
-            USER_STATS[user_id]["busquedas"] += 1
-            
-            update.message.reply_text("🔓 *Buscando PIN...*", parse_mode="Markdown")
-            
-            # Primero validar que sea Verizon
-            validacion = self.validador.validar_numero(numero)
-            if not validacion["valido"]:
-                update.message.reply_text("❌ El número no es Verizon", parse_mode="Markdown")
-                return
-            
-            resultado = self.validador.buscar_pin(numero)
-            
-            if resultado["exito"]:
-                respuesta = f"""
-🎉 *PIN ENCONTRADO*
-
-📱 *Número:* `{numero}`
-🔑 *PIN:* `{resultado['pin']}`
-🎯 *Intentos:* {resultado['intentos']}
-
-✅ PIN identificado correctamente
-                """
-                USER_STATS[user_id]["validados"] += 1
-            else:
-                respuesta = f"""
-❌ *PIN NO ENCONTRADO*
-
-📱 *Número:* `{numero}`
-🎯 *Intentos:* {resultado['intentos']}
-
-💡 Prueba con otro número
-                """
-            
-            update.message.reply_text(respuesta, parse_mode="Markdown")
-        
-        def comando_stats(self, update: Update, context: CallbackContext):
-            user_id = update.effective_user.id
-            stats = USER_STATS[user_id]
-            
-            respuesta = f"""
-📊 *TUS ESTADÍSTICAS*
-
-👤 *Usuario:* {update.effective_user.first_name}
-✅ *Líneas validadas:* {stats['validados']}
-🔍 *Búsquedas realizadas:* {stats['busquedas']}
-
-💎 *Status:* {'🔥 PREMIUM' if user_id == OWNER_ID else '💀 FREE'}
-            """
-            
-            update.message.reply_text(respuesta, parse_mode="Markdown")
-        
-        def mensaje_normal(self, update: Update, context: CallbackContext):
-            update.message.reply_text("""
-🤖 *Verizon Method Bot*
-
-Usa /start para ver comandos
-Usa /validar +1234567890 para validar
-
-*Comandos:*
-/validar - Validar línea
-/generar - Generar números
-/pin - Buscar PIN
-/estadisticas - Estadísticas
-            """, parse_mode="Markdown")
-        
-        def iniciar_bot(self):
-            print("🤖 Bot Verizon Method - INICIADO")
-            self.updater.start_polling()
-            self.updater.idle()
-
-except ImportError:
-    print("⚠️ Librerías de Telegram no disponibles")
-
-# Función principal
-def main():
-    print("🚀 Iniciando Verizon Method...")
-    
-    # Iniciar bot si hay token
-    if TELEGRAM_TOKEN:
-        try:
-            bot = BotVerizon()
-            print("✅ Bot Telegram: ACTIVO")
-            
-            # Iniciar en hilo separado
-            import threading
-            bot_thread = threading.Thread(target=bot.iniciar_bot, daemon=True)
-            bot_thread.start()
-            
-        except Exception as e:
-            print(f"❌ Error en bot: {e}")
-    
-    # Iniciar servidor web
-    port = int(os.environ.get('PORT', 10000))
-    print(f"🌐 Servidor web en puerto {port}")
-    app.run(host='0.0.0.0', port=port, debug=False)
-
-if __name__ == "__main__":
-    main()
