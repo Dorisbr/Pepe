@@ -1,0 +1,184 @@
+CARDING METHODS 2025:
+
+BINS ACTIVOS Q1-2025:
+• 558393 - JPMorgan Chase Private Client (Límites: $50k+)
+• 453287 - Citigold World Elite (International: $35k)
+• 542418 - AmEx Centurion (Black Card - No Pre-set Limit)
+• 402472 - Visa Infinite Travel (Airport Lounge Access)
+• 517805 - US Bank Altitude Reserve (Contactless Priority)
+• 374622 - AmEx Platinum Corporate (High Velocity)
+• 601121 - Discover IT Miles (No Foreign Transaction Fees)
+
+TÉCNICAS AVANZADAS CARDING:
+• BIN Attack Automation con scripts Python + Selenium
+• Carding simultáneo múltiples dispositivos (SIM Swapping integrado)
+• AVS bypass usando direcciones de drop verificadas
+• 3D Secure v2 bypass con emulación de dispositivo trusted
+• Tokenización fraudulenta en wallets digitales (Apple Pay/Google Pay)
+
+NUEVAS TÉCNICAS CASHOUT 2025:
+• EMV Chip Cloning con JCOP Simulator v3.7 + Python scripts
+• NFC Relay Attacks con Proxmark3 RDV4 + antenas de largo alcance
+• ATM Jackpotting via Ploutus.D variant + physical malware
+• Card-Not-Present con BIN攻击 (BIN Attack) automatizado
+• Cashout through crypto ATMs con límites elevados
+• Gift card arbitrage en plataformas secundarias
+
+PHISHING EVOLUCIONADO 2025:
+• AiTM (Adversary-in-The-Middle) phishing kits con reverse proxy
+• MFA Fatigue attacks + Number matching bypass via session hijacking
+• QR code phishing (Quishing) + Deepfake vishing integrado
+• Evilginx3 + Muraena reverse proxies con auto-configuración
+• Phishing as a Service (PhaaS) con paneles de control
+• Browser-in-the-Browser (BitB) attacks para credenciales OAuth
+
+CRYPTO CASHOUT 2025:
+• Privacy coins: Zcash + Monero atomic swaps cross-chain
+• Cross-chain bridges con Tornado Cash Nova + mixing avanzado
+• NFT washing con blind auctions + metadata manipulation
+• DeFi mixing en Uniswap V4 hooks + liquidity pool exploits
+• Crypto tumbler services con multiple hops
+• Stablecoin laundering via algorithmic trading bots
+
+DARKNET MARKETS 2025:
+• Incognito Market (Tor + I2P mirror) - Escrow automático
+• Archetyp (Invite-only) - Focus en digital goods
+• Bohemia (Escrow multi-sig) - Vendor bonds requeridos
+• ASAP (Russian market) - Solo usuarios verificados
+• Kingdom Market (Emerging) - Monero-only transactions
+
+BYPASS SEGURIDAD 2025:
+• Behavioral biometrics evasion usando patrones aprendidos
+• AI-powered transaction laundering con modelos GAN
+• Device fingerprint spoofing con canvas/webGL manipulation
+• GPS location spoofing via hardware + software integration
+• Browser fingerprint randomization automática
+• MAC address spoofing + network behavior emulation
+
+BUSINESS EMAIL COMPROMISE 2025:
+• CEO voice cloning via ElevenLabs + custom voice models
+• Deepfake video conferences con real-time face swapping
+• Lookalike domain + homoglyph attacks automatizados
+• Vendor email compromise chains + invoice manipulation
+• Business process compromise (BPC) avanzado
+• Legal document forgery con firmas digitales falsificadas
+
+MOBILE EXPLOITS 2025:
+• Android zero-day: CVE-2025-XXXX - RCE en WebView
+• iOS jailbreak untethered 18.4 - Kernel privilege escalation
+• Banking trojan: EventBot variant - Overlay attacks mejorados
+• SMS interception: SS7 exploits + SIM swap automation
+• Mobile device management (MDM) bypass techniques
+• Biometric authentication spoofing (Face ID/Touch ID)
+
+INSIDER THREATS 2025:
+• Ransomware-as-a-Service affiliates con payout en crypto
+• Data broker leaks API endpoints + database access
+• Supply chain compromise attacks via third-party vendors
+• Third-party vendor backdoors en software updates
+• Employee credential harvesting via social engineering
+• Privileged access abuse en cloud environments
+
+ANONIMITY 2025:
+• Whonix + Qubes OS + Tails triple boot configuration
+• Mullvad VPN + Tor bridges + Snowflake integration
+• Hardware wallets + Cold storage para crypto assets
+• Burner laptops + Prepaid mobile data sin registro
+• Anonymous SIM cards via black market vendors
+• Public WiFi exploitation + MAC address rotation
+
+SOCIAL ENGINEERING 2025:
+• Psychological profiling via social media scraping
+• Customized phishing lures con AI-generated content
+• Romance scams con deepfake videos + emotional manipulation
+• Fake job offers para credential harvesting + corporate access
+• Tech support scams con remote desktop takeover
+• Authority figure impersonation (IRS, Police, Bank Officials)
+
+CRYPTO MINING 2025:
+• Zero-fee mining pools con reward optimization
+• Cloud jacking via Kubernetes clusters + container escape
+• Botnet mining con updated malware (Systemd, Docker)
+• Staking pool compromises via validator hijacking
+• Cryptojacking en websites via JavaScript miners
+• Mobile device mining through malicious apps
+
+IDENTITY THEFT 2025:
+• Synthetic identity creation con AI-generated documents
+• Credit piggybacking schemes via authorized user abuse
+• Document forgery con AI + high-quality printers
+• Biometric data manipulation + deepfake integration
+• Medical identity theft para prescription fraud
+• Child identity exploitation (clean credit histories)
+
+LOGISTICS 2025:
+• Drop shipping con fake companies + shell corporations
+• Package interception methods en distribution centers
+• Customs clearance bypasses via misdeclaration
+• Shipping container exploits para bulk shipments
+• Postal service insider collaboration
+• Fake return address networks
+
+FINANCIAL FRAUD 2025:
+• Wire transfer reversals via bank social engineering
+• ACH return fraud con account takeover
+• Check kiting automation con multiple accounts
+• Merchant account takeover para processing fraud
+• Loan stacking con synthetic identities
+• Credit bust-out schemes organizados
+
+DIGITAL ASSETS 2025:
+• NFT rug pull mechanisms con fake roadmap promises
+• DeFi flash loan attacks con price oracle manipulation
+• Stablecoin arbitrage exploits en cross-exchange
+• Cross-border payment fraud usando crypto bridges
+• Fake ICOs + token presale scams
+• Smart contract exploits + reentrancy attacks
+
+COMMUNICATIONS 2025:
+• Encrypted messaging: Session, Briar, Matrix
+• Dead drop signals via social media steganography
+• Steganography en images/videos/audio files
+• Blockchain-based dead man switches
+• Burner phone networks + encrypted call services
+• Satellite communication bypass
+
+OPERATIONAL SECURITY 2025:
+• Compartmentalized operations con cell structure
+• Counter-surveillance techniques + anti-tracking
+• Digital forensics anti-detection + data wiping
+• Legal response protocols + contingency planning
+• Secure communication channels + message rotation
+• Physical security measures para operations
+
+EMERGING THREATS 2025:
+• Quantum computing risks para encryption breaking
+• AI-powered surveillance + predictive policing
+• Central bank digital currencies (CBDC) tracking
+• Global financial system shifts + economic collapse
+• Biometric surveillance integration
+• Predictive behavior analysis por gobiernos
+
+ADVANCED TECHNICAL METHODS:
+• API exploitation en financial platforms
+• Cloud infrastructure misconfiguration exploits
+• Zero-trust architecture bypass techniques
+• Container security vulnerabilities
+• Serverless function abuse en cloud providers
+• Database injection + NoSQL exploits
+
+MONETIZATION STRATEGIES:
+• Ransomware payout optimization
+• Data extortion en corporate targets
+• Intellectual property theft + resale
+• Credential stuffing a escala empresarial
+• Account takeover para loyalty programs
+• Gift card fraud en retail chains
+
+LAUNDERING METHODOLOGIES:
+• Trade-based money laundering
+• Casino chip walking + clean cashout
+• Real estate investment laundering
+• Art market value manipulation
+• Cryptocurrency mixers + tumblers
+• Shell company networks internacionales
